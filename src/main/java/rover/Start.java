@@ -13,15 +13,19 @@ public class Start {
 
     public static void main(String[] args) {
 
+        //set random seed if seed given
         if (args.length > 1) {
             long seed = Long.parseLong(args[1]);
             random.setSeed(seed);
         }
+        //initialise mars field
         init();
-        String pg = args[0];
+        String command = args[0];
+        //print mars starting
         out();
-        for (int i = 0; i < pg.length(); i++) {
-            makeMove(pg.charAt(i));
+        //do all commands and output
+        for (int i = 0; i < command.length(); i++) {
+            makeMove(command.charAt(i));
             out();
         }
     }
@@ -61,38 +65,19 @@ public class Start {
 	}
 
 	public static void out() {
-        // Set<int[]> keySet = mars.keySet();
-        // for (int[] e : keySet) {
-        // if (e[0] == 39 && e[1] == 10)
-        // System.err.println(mars.get(e) + " " + e.hashCode());
-        // }
 
         int[] max = maximum(mars.keySet());
         for (int j = 0; j < max[1]; j++) {
             for (int i = 0; i < max[0]; i++) {
-                // System.out.println(i + "," + j + ": " + get(mars, new int[] { i, j }));
-
-                //output freespaces
+                //output free spaces
                 if (get(mars, new int[]{i, j}) == null) {
                     System.out.print(" ");
                     continue;
                 }
                 //output stones
-                if (get(mars, new int[]{i, j}).equals("#"))
+                else if (get(mars, new int[]{i, j}).equals("#"))
                     System.out.print("#");
-                //output rover facing north
-                else if (get(mars, new int[]{i, j}).equals("n"))
-                    System.out.print("^");
-                //output rover facing south
-                else if (get(mars, new int[]{i, j}).equals("s"))
-                    System.out.print("V");
-                //output rover facing east
-                else if (get(mars, new int[]{i, j}).equals("e"))
-                    System.out.print(">");
-                //output rover facing west
-                if (get(mars, new int[]{i, j}).equals("w"))
-                    System.out.print("<");
-
+                else System.out.print(outRover(j, i));
             }
             System.out.println();
         }
@@ -102,6 +87,24 @@ public class Start {
         }
         System.out.println();
     }
+
+    private static String outRover(int j, int i) {
+        //output rover facing north
+        if (get(mars, new int[]{i, j}).equals("n"))
+            return ("^");
+            //output rover facing south
+        else if (get(mars, new int[]{i, j}).equals("s"))
+            return ("V");
+            //output rover facing east
+        else if (get(mars, new int[]{i, j}).equals("e"))
+            return (">");
+            //output rover facing west
+        else if (get(mars, new int[]{i, j}).equals("w"))
+        return ("<");
+
+        return null;
+    }
+
 
     public static void makeMove(char input) {
 	    //Input FORWARD
