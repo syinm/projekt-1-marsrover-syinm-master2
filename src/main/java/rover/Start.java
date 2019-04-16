@@ -110,23 +110,23 @@ public class Start {
 
 
     public static void makeMove(char input) {
+        int[] position = findRover();
         //Input FORWARD
         if (input == 'f')
-            moveForward();
+            moveForward(position);
             //Input BACK
         else if (input == 'b')
-            moveBack();
+            moveBack(position);
             //Input LEFT
         else if (input == 'l')
-            turnLeft();
+            turnLeft(position);
             //Input RIGHT
         else if (input == 'r')
-            turnRight();
+            turnRight(position);
 
     }
 
-    private static void turnRight() {
-        int[] position = findRover();
+    private static void turnRight(int[] position) {
         if (get(mars, position).equals("w"))
             mars.put(position, "n");
         else if (get(mars, position).equals("e"))
@@ -137,8 +137,7 @@ public class Start {
             mars.put(position, "w");
     }
 
-    private static void turnLeft() {
-        int[] position = findRover();
+    private static void turnLeft(int[] position) {
         if (get(mars, position).equals("n"))
             mars.put(position, "w");
         else if (get(mars, position).equals("s"))
@@ -149,8 +148,7 @@ public class Start {
             mars.put(position, "s");
     }
 
-    private static void moveForward() {
-        int[] position = findRover();
+    private static void moveForward(int[] position) {
         if (get(mars, position).equals("n")) {
             position[1]--;
             if (get(mars, position).equals("#")) {
@@ -173,8 +171,8 @@ public class Start {
         }
     }
 
-    private static void moveBack() {
-        int[] position = findRover();
+    private static void moveBack(int[] position) {
+
         if (get(mars, position).equals("s")) {
             position[1]--;
             if (get(mars, position).equals("#")) {
