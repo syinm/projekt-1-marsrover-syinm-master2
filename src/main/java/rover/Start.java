@@ -108,7 +108,48 @@ public class Start {
         return null;
     }
 
-    private static void moveForward(){
+
+    public static void makeMove(char input) {
+        //Input FORWARD
+        if (input == 'f')
+            moveForward();
+            //Input BACK
+        else if (input == 'b')
+            moveBack();
+            //Input LEFT
+        else if (input == 'l')
+            turnLeft();
+            //Input RIGHT
+        else if (input == 'r')
+            turnRight();
+
+    }
+
+    private static void turnRight() {
+        int[] position = findRover();
+        if (get(mars, position).equals("w"))
+            mars.put(position, "n");
+        else if (get(mars, position).equals("e"))
+            mars.put(position, "s");
+        else if (get(mars, position).equals("n"))
+            mars.put(position, "e");
+        else if (get(mars, position).equals("s"))
+            mars.put(position, "w");
+    }
+
+    private static void turnLeft() {
+        int[] position = findRover();
+        if (get(mars, position).equals("n"))
+            mars.put(position, "w");
+        else if (get(mars, position).equals("s"))
+            mars.put(position, "e");
+        else if (get(mars, position).equals("e"))
+            mars.put(position, "n");
+        else if (get(mars, position).equals("w"))
+            mars.put(position, "s");
+    }
+
+    private static void moveForward() {
         int[] position = findRover();
         if (get(mars, position).equals("n")) {
             position[1]--;
@@ -132,57 +173,31 @@ public class Start {
         }
     }
 
-    public static void makeMove(char input) {
-        //Input FORWARD
-        if (input == 'f') {
-            moveForward();
-            //Input BACK
-        } else if (input == 'b') {
-            int[] position = findRover();
-            if (get(mars, position).equals("s")) {
-                position[1]--;
-                if (get(mars, position).equals("#")) {
-                    position[1]++;
-                }
-            } else if (get(mars, position).equals("n")) {
+    private static void moveBack() {
+        int[] position = findRover();
+        if (get(mars, position).equals("s")) {
+            position[1]--;
+            if (get(mars, position).equals("#")) {
                 position[1]++;
-                if (get(mars, position).equals("#")) {
-                    position[1]--;
-                }
-            } else if (get(mars, position).equals("w")) {
-                position[0]++;
-                if (get(mars, position).equals("#")) {
-                    position[0]--;
-                }
-            } else if (get(mars, position).equals("e")) {
-                position[0]--;
-                if (get(mars, position).equals("#")) {
-                    position[0]++;
-                }
             }
-            //Input LEFT
-        } else if (input == 'l') {
-            int[] position = findRover();
-            if (get(mars, position).equals("n"))
-                mars.put(position, "w");
-            else if (get(mars, position).equals("s"))
-                mars.put(position, "e");
-            else if (get(mars, position).equals("e"))
-                mars.put(position, "n");
-            else if (get(mars, position).equals("w"))
-                mars.put(position, "s");
-            //Input RIGHT
-        } else if (input == 'r') {
-            int[] position = findRover();
-            if (get(mars, position).equals("w"))
-                mars.put(position, "n");
-            else if (get(mars, position).equals("e"))
-                mars.put(position, "s");
-            else if (get(mars, position).equals("n"))
-                mars.put(position, "e");
-            else if (get(mars, position).equals("s"))
-                mars.put(position, "w");
+        } else if (get(mars, position).equals("n")) {
+            position[1]++;
+            if (get(mars, position).equals("#")) {
+                position[1]--;
+            }
+        } else if (get(mars, position).equals("w")) {
+            position[0]++;
+            if (get(mars, position).equals("#")) {
+                position[0]--;
+            }
+        } else if (get(mars, position).equals("e")) {
+            position[0]--;
+            if (get(mars, position).equals("#")) {
+                position[0]++;
+            }
         }
+
+
     }
 
     private static int[] findRover() {
