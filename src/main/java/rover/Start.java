@@ -8,8 +8,8 @@ import java.util.Set;
 
 public class Start {
 
-	static Random random = new Random();
-	static LinkedHashMap<int[], String> mars;
+    static Random random = new Random();
+    static LinkedHashMap<int[], String> mars;
 
     public static void main(String[] args) {
 
@@ -30,41 +30,41 @@ public class Start {
         }
     }
 
-	public static void init() {
-		mars = new LinkedHashMap<>();
-		int width = 80;
-		int hight = 20;
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < hight; j++) {
-				int[] p = new int[] { i, j };
-				if (random.nextDouble() < 0.25 && !(width/2 == i && hight/2 == j))
-					mars.put(p, "#");
-			}
-		}
-		mars.put(new int[] { width/2, hight/2 }, "n");
-	}
+    public static void init() {
+        mars = new LinkedHashMap<>();
+        int width = 80;
+        int hight = 20;
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < hight; j++) {
+                int[] p = new int[]{i, j};
+                if (random.nextDouble() < 0.25 && !(width / 2 == i && hight / 2 == j))
+                    mars.put(p, "#");
+            }
+        }
+        mars.put(new int[]{width / 2, hight / 2}, "n");
+    }
 
-	public static int[] maximum(Set<int[]> set) {
-		int[] x = new int[2];
-		for (int[] e : set) {
-			if (e[0] > x[0])
-				x[0] = e[0];
-			if (e[1] > x[1])
-				x[1] = e[1];
-		}
-		return x;
-	}
+    public static int[] maximum(Set<int[]> set) {
+        int[] x = new int[2];
+        for (int[] e : set) {
+            if (e[0] > x[0])
+                x[0] = e[0];
+            if (e[1] > x[1])
+                x[1] = e[1];
+        }
+        return x;
+    }
 
-	public static String get(Map<int[], String> kloetze, int[] p) {
-		Set<Entry<int[], String>> entrySet = kloetze.entrySet();
-		for (Entry<int[], String> entry : entrySet) {
-			if (entry.getKey()[0] == p[0] && entry.getKey()[1] == p[1])
-				return entry.getValue();
-		}
-		return null;
-	}
+    public static String get(Map<int[], String> kloetze, int[] p) {
+        Set<Entry<int[], String>> entrySet = kloetze.entrySet();
+        for (Entry<int[], String> entry : entrySet) {
+            if (entry.getKey()[0] == p[0] && entry.getKey()[1] == p[1])
+                return entry.getValue();
+        }
+        return null;
+    }
 
-	public static void out() {
+    public static void out() {
 
         int[] max = maximum(mars.keySet());
         for (int j = 0; j < max[1]; j++) {
@@ -81,7 +81,6 @@ public class Start {
             }
             System.out.println();
         }
-        //output seperation line
         outputSeperation(max[0]);
     }
 
@@ -93,47 +92,50 @@ public class Start {
     }
 
     private static String outRover(int j, int i) {
-        //output rover facing north
+        // rover facing north
         if (get(mars, new int[]{i, j}).equals("n"))
             return ("^");
-            //output rover facing south
+            // rover facing south
         else if (get(mars, new int[]{i, j}).equals("s"))
             return ("V");
-            //output rover facing east
+            // rover facing east
         else if (get(mars, new int[]{i, j}).equals("e"))
             return (">");
-            //output rover facing west
+            // rover facing west
         else if (get(mars, new int[]{i, j}).equals("w"))
-        return ("<");
+            return ("<");
 
         return null;
     }
 
+    private static void moveForward(){
+        int[] position = findRover();
+        if (get(mars, position).equals("n")) {
+            position[1]--;
+            if (get(mars, position).equals("#")) {
+                position[1]++;
+            }
+        } else if (get(mars, position).equals("s")) {
+            position[1]++;
+            if (get(mars, position).equals("#")) {
+                position[1]--;
+            }
+        } else if (get(mars, position).equals("e")) {
+            position[0]++;
+            if (get(mars, position).equals("#")) {
+                position[0]--;
+            }
+        } else if (get(mars, position).equals("w"))
+            position[0]--;
+        if (get(mars, position).equals("#")) {
+            position[0]++;
+        }
+    }
 
     public static void makeMove(char input) {
-	    //Input FORWARD
+        //Input FORWARD
         if (input == 'f') {
-            int[] position = findRover();
-            if (get(mars, position).equals("n")) {
-                position[1]--;
-                if (get(mars, position).equals("#")) {
-                    position[1]++;
-                }
-            } else if (get(mars, position).equals("s")) {
-                position[1]++;
-                if (get(mars, position).equals("#")) {
-                    position[1]--;
-                }
-            } else if (get(mars, position).equals("e")) {
-                position[0]++;
-                if (get(mars, position).equals("#")) {
-                    position[0]--;
-                }
-            } else if (get(mars, position).equals("w"))
-                position[0]--;
-            if (get(mars, position).equals("#")) {
-                position[0]++;
-            }
+            moveForward();
             //Input BACK
         } else if (input == 'b') {
             int[] position = findRover();
@@ -183,13 +185,13 @@ public class Start {
         }
     }
 
-	private static int[] findRover() {
-		Set<Entry<int[], String>> entrySet = mars.entrySet();
-		for (Entry<int[], String> entry : entrySet) {
-			if (entry.getValue() != null && !entry.getValue().equals("#"))
-				return entry.getKey();
-		}
-		throw new IllegalStateException("Rover missing in action");
-	}
+    private static int[] findRover() {
+        Set<Entry<int[], String>> entrySet = mars.entrySet();
+        for (Entry<int[], String> entry : entrySet) {
+            if (entry.getValue() != null && !entry.getValue().equals("#"))
+                return entry.getKey();
+        }
+        throw new IllegalStateException("Rover missing in action");
+    }
 
 }
