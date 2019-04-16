@@ -82,7 +82,11 @@ public class Start {
             System.out.println();
         }
         //output seperation line
-        for (int i = 0; i < max[0]; i++) {
+        outputSeperation(max[0]);
+    }
+
+    private static void outputSeperation(int max) {
+        for (int i = 0; i < max; i++) {
             System.out.print("=");
         }
         System.out.println();
