@@ -70,10 +70,7 @@ public class Start {
         for (int j = 0; j < max[1]; j++) {
             for (int i = 0; i < max[0]; i++) {
                 //output free spaces
-                if (get(mars, new int[]{i, j}) == null) {
-                    System.out.print(" ");
-                    continue;
-                } else System.out.print(outObject(j, i));
+                 System.out.print(outObject(j, i));
             }
             System.out.println();
         }
@@ -88,8 +85,11 @@ public class Start {
     }
 
     private static String outObject(int j, int i) {
-        // rover facing north
-        if (get(mars, new int[]{i, j}).equals("n"))
+        //output free spaces
+        if (null == get(mars, new int[]{i, j}))
+            return(" ");
+            // rover facing north
+        else if (get(mars, new int[]{i, j}).equals("n"))
             return ("^");
             // rover facing south
         else if (get(mars, new int[]{i, j}).equals("s"))
@@ -107,6 +107,7 @@ public class Start {
     }
 
     public static void makeMove(char input) {
+
         int[] position = findRover();
         //Input FORWARD
         if (input == 'f')
@@ -124,6 +125,7 @@ public class Start {
     }
 
     private static void turnRight(int[] position) {
+
         if (get(mars, position).equals("w"))
             mars.put(position, "n");
         else if (get(mars, position).equals("e"))
@@ -135,6 +137,7 @@ public class Start {
     }
 
     private static void turnLeft(int[] position) {
+
         if (get(mars, position).equals("n"))
             mars.put(position, "w");
         else if (get(mars, position).equals("s"))
@@ -146,6 +149,7 @@ public class Start {
     }
 
     private static void moveForward(int[] position) {
+
         if (get(mars, position).equals("n")) {
             position[1]--;
             if (get(mars, position).equals("#")) {
@@ -191,11 +195,10 @@ public class Start {
                 position[0]++;
             }
         }
-
-
     }
 
     private static int[] findRover() {
+
         Set<Entry<int[], String>> entrySet = mars.entrySet();
         for (Entry<int[], String> entry : entrySet) {
             if (entry.getValue() != null && !entry.getValue().equals("#"))
