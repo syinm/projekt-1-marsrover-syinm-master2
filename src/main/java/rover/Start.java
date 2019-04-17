@@ -34,9 +34,9 @@ public class Start {
         int hight = 20;
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < hight; j++) {
-                int[] p = new int[]{i, j};
+                int[] position = new int[]{i, j};
                 if (random.nextDouble() < 0.25 && !(width / 2 == i && hight / 2 == j))
-                    mars.put(p, "#");
+                    mars.put(position, "#");
             }
         }
         mars.put(new int[]{width / 2, hight / 2}, "n");
@@ -55,10 +55,10 @@ public class Start {
         return x;
     }
 
-    public static String get(Map<int[], String> kloetze, int[] p) {
+    public static String getObject(Map<int[], String> kloetze, int[] pos) {
         Set<Entry<int[], String>> entrySet = kloetze.entrySet();
         for (Entry<int[], String> entry : entrySet) {
-            if (entry.getKey()[0] == p[0] && entry.getKey()[1] == p[1])
+            if (entry.getKey()[0] == pos[0] && entry.getKey()[1] == pos[1])
                 return entry.getValue();
         }
         return null;
@@ -69,7 +69,6 @@ public class Start {
         int[] max = maximum(mars.keySet());
         for (int j = 0; j < max[1]; j++) {
             for (int i = 0; i < max[0]; i++) {
-                //output free spaces
                  System.out.print(outObject(j, i));
             }
             System.out.println();
@@ -86,22 +85,22 @@ public class Start {
 
     private static String outObject(int j, int i) {
         //output free spaces
-        if (null == get(mars, new int[]{i, j}))
+        if (null == getObject(mars, new int[]{i, j}))
             return(" ");
             // rover facing north
-        else if (get(mars, new int[]{i, j}).equals("n"))
+        else if (getObject(mars, new int[]{i, j}).equals("n"))
             return ("^");
             // rover facing south
-        else if (get(mars, new int[]{i, j}).equals("s"))
+        else if (getObject(mars, new int[]{i, j}).equals("s"))
             return ("V");
             // rover facing east
-        else if (get(mars, new int[]{i, j}).equals("e"))
+        else if (getObject(mars, new int[]{i, j}).equals("e"))
             return (">");
             // rover facing west
-        else if (get(mars, new int[]{i, j}).equals("w"))
+        else if (getObject(mars, new int[]{i, j}).equals("w"))
             return ("<");
             //output stones
-        else if (get(mars, new int[]{i, j}).equals("#"))
+        else if (getObject(mars, new int[]{i, j}).equals("#"))
             return ("#");
         return null;
     }
@@ -121,77 +120,77 @@ public class Start {
             //Input RIGHT
         else if (input == 'r')
             turnRight(position);
-
     }
 
     private static void turnRight(int[] position) {
 
-        if (get(mars, position).equals("w"))
+        if (getObject(mars, position).equals("w"))
             mars.put(position, "n");
-        else if (get(mars, position).equals("e"))
+        else if (getObject(mars, position).equals("e"))
             mars.put(position, "s");
-        else if (get(mars, position).equals("n"))
+        else if (getObject(mars, position).equals("n"))
             mars.put(position, "e");
-        else if (get(mars, position).equals("s"))
+        else if (getObject(mars, position).equals("s"))
             mars.put(position, "w");
     }
 
     private static void turnLeft(int[] position) {
 
-        if (get(mars, position).equals("n"))
+        if (getObject(mars, position).equals("n"))
             mars.put(position, "w");
-        else if (get(mars, position).equals("s"))
+        else if (getObject(mars, position).equals("s"))
             mars.put(position, "e");
-        else if (get(mars, position).equals("e"))
+        else if (getObject(mars, position).equals("e"))
             mars.put(position, "n");
-        else if (get(mars, position).equals("w"))
+        else if (getObject(mars, position).equals("w"))
             mars.put(position, "s");
     }
 
     private static void moveForward(int[] position) {
 
-        if (get(mars, position).equals("n")) {
+        if (getObject(mars, position).equals("n")) {
             position[1]--;
-            if (get(mars, position).equals("#")) {
+            if (getObject(mars, position).equals("#")) {
                 position[1]++;
             }
-        } else if (get(mars, position).equals("s")) {
+        } else if (getObject(mars, position).equals("s")) {
             position[1]++;
-            if (get(mars, position).equals("#")) {
+            if (getObject(mars, position).equals("#")) {
                 position[1]--;
             }
-        } else if (get(mars, position).equals("e")) {
+        } else if (getObject(mars, position).equals("e")) {
             position[0]++;
-            if (get(mars, position).equals("#")) {
+            if (getObject(mars, position).equals("#")) {
                 position[0]--;
             }
-        } else if (get(mars, position).equals("w"))
+        } else if (getObject(mars, position).equals("w")) {
             position[0]--;
-        if (get(mars, position).equals("#")) {
-            position[0]++;
+            if (getObject(mars, position).equals("#")) {
+                position[0]++;
+            }
         }
     }
 
     private static void moveBack(int[] position) {
 
-        if (get(mars, position).equals("s")) {
+        if (getObject(mars, position).equals("s")) {
             position[1]--;
-            if (get(mars, position).equals("#")) {
+            if (getObject(mars, position).equals("#")) {
                 position[1]++;
             }
-        } else if (get(mars, position).equals("n")) {
+        } else if (getObject(mars, position).equals("n")) {
             position[1]++;
-            if (get(mars, position).equals("#")) {
+            if (getObject(mars, position).equals("#")) {
                 position[1]--;
             }
-        } else if (get(mars, position).equals("w")) {
+        } else if (getObject(mars, position).equals("w")) {
             position[0]++;
-            if (get(mars, position).equals("#")) {
+            if (getObject(mars, position).equals("#")) {
                 position[0]--;
             }
-        } else if (get(mars, position).equals("e")) {
+        } else if (getObject(mars, position).equals("e")) {
             position[0]--;
-            if (get(mars, position).equals("#")) {
+            if (getObject(mars, position).equals("#")) {
                 position[0]++;
             }
         }
