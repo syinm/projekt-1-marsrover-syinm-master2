@@ -21,8 +21,6 @@ public class Start {
         //initialise mars field
         init();
         String command = args[0];
-        //print mars starting
-        out();
         //do all commands and output
         for (int i = 0; i < command.length(); i++) {
             makeMove(command.charAt(i));
@@ -42,6 +40,8 @@ public class Start {
             }
         }
         mars.put(new int[]{width / 2, hight / 2}, "n");
+        //output initial mars
+        out();
     }
 
     public static int[] maximum(Set<int[]> set) {
@@ -73,11 +73,7 @@ public class Start {
                 if (get(mars, new int[]{i, j}) == null) {
                     System.out.print(" ");
                     continue;
-                }
-                //output stones
-                else if (get(mars, new int[]{i, j}).equals("#"))
-                    System.out.print("#");
-                else System.out.print(outRover(j, i));
+                } else System.out.print(outObject(j, i));
             }
             System.out.println();
         }
@@ -91,7 +87,7 @@ public class Start {
         System.out.println();
     }
 
-    private static String outRover(int j, int i) {
+    private static String outObject(int j, int i) {
         // rover facing north
         if (get(mars, new int[]{i, j}).equals("n"))
             return ("^");
@@ -104,10 +100,11 @@ public class Start {
             // rover facing west
         else if (get(mars, new int[]{i, j}).equals("w"))
             return ("<");
-
+            //output stones
+        else if (get(mars, new int[]{i, j}).equals("#"))
+            return ("#");
         return null;
     }
-
 
     public static void makeMove(char input) {
         int[] position = findRover();
