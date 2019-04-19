@@ -149,27 +149,29 @@ public class Start {
     private static int[] moveForward(int[] position) {
 
         if ("n".equals(getObject(mars, position)) && !"#".equals(getObject(mars, new int[]{position[0], position[1] - 1})))
-           return new int[]{position[0],position[1]--};
+            return new int[]{position[0], position[1]--};
         else if ("s".equals(getObject(mars, position)) && !"#".equals(getObject(mars, new int[]{position[0], position[1] + 1})))
             return new int[]{position[0], position[1]++};
         else if ("e".equals(getObject(mars, position)) && !"#".equals(getObject(mars, new int[]{position[0] + 1, position[1]})))
             return new int[]{position[0]++, position[1]};
         else if ("w".equals(getObject(mars, position)) && !"#".equals(getObject(mars, new int[]{position[0] - 1, position[1]})))
-            return new int[]{position[0]--,position[1]};
+            return new int[]{position[0]--, position[1]};
         else
             return position;
     }
 
-    private static void moveBack(int[] position) {
+    private static int[] moveBack(int[] position) {
 
         if ("s".equals(getObject(mars, position)) && !"#".equals(getObject(mars, new int[]{position[0], position[1] - 1})))
-            position[1]--;
+            return new int[]{position[0], position[1]--};
         else if ("n".equals(getObject(mars, position)) && !"#".equals(getObject(mars, new int[]{position[0], position[1] + 1})))
-            position[1]++;
+            return new int[]{position[0], position[1]++};
         else if ("w".equals(getObject(mars, position)) && !"#".equals(getObject(mars, new int[]{position[0] + 1, position[1]})))
-            position[0]++;
+            return new int[]{position[0]++, position[1]};
         else if ("e".equals(getObject(mars, position)) && !"#".equals(getObject(mars, new int[]{position[0] - 1, position[1]})))
-            position[0]--;
+            return new int[]{position[0]--, position[1]};
+        else
+            return position;
     }
 
     private static int[] findRover() {
