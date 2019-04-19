@@ -88,19 +88,19 @@ public class Start {
         if (null == getObject(mars, new int[]{i, j}))
             return(" ");
             // rover facing north
-        else if (getObject(mars, new int[]{i, j}).equals("n"))
+        else if ("n".equals(getObject(mars, new int[]{i, j})))
             return ("^");
             // rover facing south
-        else if (getObject(mars, new int[]{i, j}).equals("s"))
+        else if ("s".equals(getObject(mars, new int[]{i, j})))
             return ("V");
             // rover facing east
-        else if (getObject(mars, new int[]{i, j}).equals("e"))
+        else if ("e".equals(getObject(mars, new int[]{i, j})))
             return (">");
             // rover facing west
-        else if (getObject(mars, new int[]{i, j}).equals("w"))
+        else if ("w".equals(getObject(mars, new int[]{i, j})))
             return ("<");
             //output stones
-        else if (getObject(mars, new int[]{i, j}).equals("#"))
+        else if ("#".equals(getObject(mars, new int[]{i, j})))
             return ("#");
         return null;
     }
