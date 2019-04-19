@@ -124,25 +124,25 @@ public class Start {
 
     private static void turnRight(int[] position) {
 
-        if (getObject(mars, position).equals("w"))
+        if ("w".equals(getObject(mars, position)))
             mars.put(position, "n");
-        else if (getObject(mars, position).equals("e"))
+        else if ("e".equals(getObject(mars, position)))
             mars.put(position, "s");
-        else if (getObject(mars, position).equals("n"))
+        else if ("n".equals(getObject(mars, position)))
             mars.put(position, "e");
-        else if (getObject(mars, position).equals("s"))
+        else if ("s".equals(getObject(mars, position)))
             mars.put(position, "w");
     }
 
     private static void turnLeft(int[] position) {
 
-        if (getObject(mars, position).equals("n"))
+        if ("n".equals(getObject(mars, position)))
             mars.put(position, "w");
-        else if (getObject(mars, position).equals("s"))
+        else if ("s".equals(getObject(mars, position)))
             mars.put(position, "e");
-        else if (getObject(mars, position).equals("e"))
+        else if ("e".equals(getObject(mars, position)))
             mars.put(position, "n");
-        else if (getObject(mars, position).equals("w"))
+        else if ("w".equals(getObject(mars, position)))
             mars.put(position, "s");
     }
 
