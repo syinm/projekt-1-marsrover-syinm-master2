@@ -28,7 +28,7 @@ public class Start {
         }
     }
 
-    public static void init() {
+    private static void init() {
         mars = new LinkedHashMap<>();
         int width = 80;
         int hight = 20;
@@ -44,7 +44,7 @@ public class Start {
         out();
     }
 
-    public static int[] maximum(Set<int[]> set) {
+    private static int[] maximum(Set<int[]> set) {
         int[] x = new int[2];
         for (int[] e : set) {
             if (e[0] > x[0])
@@ -55,7 +55,7 @@ public class Start {
         return x;
     }
 
-    public static String getObject(Map<int[], String> kloetze, int[] pos) {
+    private static String getObject(Map<int[], String> kloetze, int[] pos) {
         Set<Entry<int[], String>> entrySet = kloetze.entrySet();
         for (Entry<int[], String> entry : entrySet) {
             if (entry.getKey()[0] == pos[0] && entry.getKey()[1] == pos[1])
@@ -64,7 +64,7 @@ public class Start {
         return null;
     }
 
-    public static void out() {
+    private static void out() {
 
         int[] max = maximum(mars.keySet());
         for (int j = 0; j < max[1]; j++) {
@@ -105,7 +105,7 @@ public class Start {
         return null;
     }
 
-    public static void makeMove(char input) {
+    private static void makeMove(char input) {
 
         int[] position = findRover();
         //Input FORWARD
@@ -160,15 +160,14 @@ public class Start {
 
     private static void moveBack(int[] position) {
 
-        if ("s".equals(getObject(mars, position))&& !"#".equals(getObject(mars, new int[]{position[0], position[1] - 1})))
+        if ("s".equals(getObject(mars, position)) && !"#".equals(getObject(mars, new int[]{position[0], position[1] - 1})))
             position[1]--;
-        else if ("n".equals(getObject(mars, position))&& !"#".equals(getObject(mars, new int[]{position[0], position[1] + 1})))
+        else if ("n".equals(getObject(mars, position)) && !"#".equals(getObject(mars, new int[]{position[0], position[1] + 1})))
             position[1]++;
-        else if ("w".equals(getObject(mars, position)) && !"#".equals(getObject(mars, new int[]{position[0]+1, position[1]})))
+        else if ("w".equals(getObject(mars, position)) && !"#".equals(getObject(mars, new int[]{position[0] + 1, position[1]})))
             position[0]++;
-        else if ("e".equals(getObject(mars, position))&& !"#".equals(getObject(mars, new int[]{position[0]-1, position[1]}))) {
+        else if ("e".equals(getObject(mars, position)) && !"#".equals(getObject(mars, new int[]{position[0] - 1, position[1]})))
             position[0]--;
-        }
     }
 
     private static int[] findRover() {
