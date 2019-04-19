@@ -8,8 +8,8 @@ import java.util.Set;
 
 public class Start {
 
-    static Random random = new Random();
-    static LinkedHashMap<int[], String> mars;
+    private static Random random = new Random();
+    private static LinkedHashMap<int[], String> mars;
 
     public static void main(String[] args) {
 
