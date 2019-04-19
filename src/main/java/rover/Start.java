@@ -160,26 +160,14 @@ public class Start {
 
     private static void moveBack(int[] position) {
 
-        if (getObject(mars, position).equals("s")) {
+        if ("s".equals(getObject(mars, position))&& !"#".equals(getObject(mars, new int[]{position[0], position[1] - 1})))
             position[1]--;
-            if (getObject(mars, position).equals("#")) {
-                position[1]++;
-            }
-        } else if (getObject(mars, position).equals("n")) {
+        else if ("n".equals(getObject(mars, position))&& !"#".equals(getObject(mars, new int[]{position[0], position[1] + 1})))
             position[1]++;
-            if (getObject(mars, position).equals("#")) {
-                position[1]--;
-            }
-        } else if (getObject(mars, position).equals("w")) {
+        else if ("w".equals(getObject(mars, position)) && !"#".equals(getObject(mars, new int[]{position[0]+1, position[1]})))
             position[0]++;
-            if (getObject(mars, position).equals("#")) {
-                position[0]--;
-            }
-        } else if (getObject(mars, position).equals("e")) {
+        else if ("e".equals(getObject(mars, position))&& !"#".equals(getObject(mars, new int[]{position[0]-1, position[1]}))) {
             position[0]--;
-            if (getObject(mars, position).equals("#")) {
-                position[0]++;
-            }
         }
     }
 
