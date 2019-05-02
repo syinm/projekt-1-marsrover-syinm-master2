@@ -45,14 +45,14 @@ public class Start {
     }
 
     private static int[] maximum(Set<int[]> set) {
-        int[] x = new int[2];
-        for (int[] e : set) {
-            if (e[0] > x[0])
-                x[0] = e[0];
-            if (e[1] > x[1])
-                x[1] = e[1];
+        int[] maxSize = new int[2];
+        for (int[] size : set) {
+            if (size[0] > maxSize[0])
+                maxSize[0] = size[0];
+            if (size[1] > maxSize[1])
+                maxSize[1] = size[1];
         }
-        return x;
+        return maxSize;
     }
 
     private static String getObject(Map<int[], String> kloetze, int[] pos) {
@@ -109,9 +109,8 @@ public class Start {
 
         int[] position = findRover();
         //Input FORWARD
-        if (input == 'f') {
+        if (input == 'f')
             moveForward(position);
-        }
             //Input BACK
         else if (input == 'b')
             moveBack(position);
